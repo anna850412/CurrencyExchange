@@ -25,7 +25,7 @@ public class MainView extends VerticalLayout {
         filter.setClearButtonVisible(true);
         filter.setValueChangeMode(ValueChangeMode.EAGER);
         filter.addValueChangeListener(e -> update());
-        grid.setColumns("product name", "price", "available","quantity", "type");
+        grid.setColumns("productName", "price", "available","quantity", "type");
         form.setProduct(null);
 
         addNewProduct.addClickListener(e -> {

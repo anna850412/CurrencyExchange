@@ -2,19 +2,17 @@ package com.kodilla.restaurantfrontend.domain;
 
 import com.kodilla.restaurantfrontend.ProductType;
 
-import java.math.BigDecimal;
-
 public class Product {
     private String productName;
-    private BigDecimal price;
-    private Boolean available;
-    private Long quantity;
+    private String price;
+    private String available;
+    private String quantity;
     private ProductType type;
 
     public Product() {
     }
 
-    public Product(String productName, BigDecimal price, Boolean available, Long quantity, ProductType type) {
+    public Product(String productName, String price, String available, String quantity, ProductType type) {
         this.productName = productName;
         this.price = price;
         this.available = available;
@@ -30,27 +28,27 @@ public class Product {
         this.productName = productName;
     }
 
-    public BigDecimal getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public void setPrice(String price) {
         this.price = price;
     }
 
-    public Boolean getAvailable() {
+    public String getAvailable() {
         return available;
     }
 
-    public void setAvailable(Boolean available) {
+    public void setAvailable(String available) {
         this.available = available;
     }
 
-    public Long getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Long quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 

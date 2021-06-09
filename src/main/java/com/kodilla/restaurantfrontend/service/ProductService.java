@@ -33,10 +33,10 @@ public class ProductService {
 
     private Set exampleData() {
         Set<Product> products = new HashSet<>();
-       products.add(new Product("Pizza", new BigDecimal("32"),true, 1L, ProductType.MAIN_COURSE));
-       products.add(new Product("Pomodoro", new BigDecimal("12"),true, 1L, ProductType.SOUP));
-       products.add(new Product("Ice", new BigDecimal("22"),true, 2L, ProductType.DESSERT));
-       products.add(new Product("Coca-cola", new BigDecimal("6"),true, 2L, ProductType.DRINKS));
+       products.add(new Product("Pizza", "32","true", "1", ProductType.MAIN_COURSE));
+       products.add(new Product("Pomodoro", "12","true", "1", ProductType.SOUP));
+       products.add(new Product("Ice", "22","true", "2", ProductType.DESSERT));
+       products.add(new Product("Coca-cola", "6","true", "2", ProductType.DRINKS));
         return products;
     }
     public Set findByProductName(String productName) {
