@@ -12,27 +12,33 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
 
 @Route("Restaurant")
-public class MainView extends VerticalLayout {
+public class OrderMainView extends VerticalLayout {
     private ProductService productService = ProductService.getInstance();
     private Grid<Product> grid = new Grid<>(Product.class);
     private TextField filter = new TextField();
+    private TextField filter1 = new TextField();
     private ProductForm form = new ProductForm(this);
-    private Button addNewProduct = new Button("Add new product");
+    private Button addNewOrder = new Button("Add new order");
+    private Button menu = new Button("Menu");
 
-    public MainView() {
+    public OrderMainView() {
 
         filter.setPlaceholder("Filter by product name");
+        filter1.setPlaceholder("Filter by price");
         filter.setClearButtonVisible(true);
+        filter1.setClearButtonVisible(true);
         filter.setValueChangeMode(ValueChangeMode.EAGER);
-        filter.addValueChangeListener(e -> update());
+        filter1.setValueChangeMode(ValueChangeMode.EAGER);
+        filter.addValueChangeListener(e -> updateName());
+        filter1.addValueChangeListener(e -> updatePrice());
         grid.setColumns("productName", "price", "available","quantity", "type");
         form.setProduct(null);
 
-        addNewProduct.addClickListener(e -> {
+        addNewOrder.addClickListener(e -> {
             grid.asSingleSelect().clear(); //"czyścimy" zaznaczenie
             form.setProduct(new Product());      //dodajemy nowy obiekt do formularza
         });
-        HorizontalLayout toolbar = new HorizontalLayout(filter, addNewProduct);
+        HorizontalLayout toolbar = new HorizontalLayout(filter, filter1, addNewOrder, menu);
 
         HorizontalLayout mainContent = new HorizontalLayout(grid, form);
         mainContent.setSizeFull();
@@ -45,8 +51,12 @@ public class MainView extends VerticalLayout {
         grid.asSingleSelect().addValueChangeListener(event -> form.setProduct(grid.asSingleSelect().getValue()));
 
     }
-    private void update() {
+     private void updateName() {
         grid.setItems(productService.findByProductName(filter.getValue()));
+    }
+
+     private void updatePrice() {
+        grid.setItems(productService.findByProductPrice(filter1.getValue()));
     }
 
     public void refresh() {

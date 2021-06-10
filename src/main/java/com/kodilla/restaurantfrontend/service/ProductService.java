@@ -44,6 +44,11 @@ public class ProductService {
                 .filter(product -> product.getProductName().contains(productName))
                 .collect(Collectors.toSet());
     }
+    public Set findByProductPrice(String price) {
+        return  products.stream()
+                .filter(product -> product.getPrice().contains(price))
+                .collect(Collectors.toSet());
+    }
 
     public void save(Product product) {
         this.products.add(product);

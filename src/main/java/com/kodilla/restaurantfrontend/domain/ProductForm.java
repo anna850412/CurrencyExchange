@@ -1,6 +1,6 @@
 package com.kodilla.restaurantfrontend.domain;
 
-import com.kodilla.restaurantfrontend.MainView;
+import com.kodilla.restaurantfrontend.OrderMainView;
 import com.kodilla.restaurantfrontend.ProductType;
 import com.kodilla.restaurantfrontend.service.ProductService;
 import com.vaadin.flow.component.button.Button;
@@ -19,10 +19,10 @@ public class ProductForm extends FormLayout {
     private Button order = new Button("Order");
     private Button delete = new Button("Delete");
     private Binder<Product> binder = new Binder<Product>(Product.class);
-    private MainView mainView;
+    private OrderMainView orderMainView;
     private ProductService service = ProductService.getInstance();
 
-    public ProductForm(MainView mainView) {
+    public ProductForm(OrderMainView orderMainView) {
         type.setItems(ProductType.values());
         HorizontalLayout buttons = new HorizontalLayout(order, delete);
         order.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
@@ -30,13 +30,13 @@ public class ProductForm extends FormLayout {
         delete.addClickListener(event -> delete());
         add(productName, price, quantity, type, buttons);
         binder.bindInstanceFields(this);
-        this.mainView = mainView;
+        this.orderMainView = orderMainView;
     }
 
     private void order() {
         Product product = binder.getBean();
         service.save(product);
-        mainView.refresh();
+        orderMainView.refresh();
         setProduct(null);
 
     }
@@ -44,7 +44,7 @@ public class ProductForm extends FormLayout {
     private void delete() {
         Product product = binder.getBean();
         service.delete(product);
-        mainView.refresh();
+        orderMainView.refresh();
         setProduct(null);
     }
 
