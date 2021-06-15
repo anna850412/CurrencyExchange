@@ -1,20 +1,23 @@
 package com.kodilla.restaurantfrontend.service;
 
 import com.kodilla.restaurantfrontend.OrderMainView;
+import com.kodilla.restaurantfrontend.domain.Menu;
 import com.kodilla.restaurantfrontend.domain.Product;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
+import com.vaadin.flow.router.Route;
 
+@Route("Menu")
 public class MenuMainView extends VerticalLayout {
-    private ProductService productService = ProductService.getInstance();
-    private Grid<Product> grid = new Grid<>(Product.class);
+    private MenuService menuService = MenuService.getInstance();
+    private Grid<Menu> grid = new Grid<>(Menu.class);
     private TextField filter = new TextField();
     private TextField filter1 = new TextField();
-//    private MenuForm form = new MenuForm(this);
     private Button order = new Button("Order");
     private OrderMainView orderMainView = new OrderMainView();
 
@@ -28,15 +31,13 @@ public class MenuMainView extends VerticalLayout {
         filter.addValueChangeListener(e -> updateName());
         filter1.addValueChangeListener(e -> updatePrice());
         grid.setColumns("productName", "price", "available", "quantity", "type");
-//        form.setProduct(null);
 
         order.addClickListener(e -> {
- orderMainView.refresh();
+            UI.getCurrent().navigate("Order");
         });
         HorizontalLayout toolbar = new HorizontalLayout(filter, filter1, order);
 
         HorizontalLayout mainContent = new HorizontalLayout(grid);
-//                form);
         mainContent.setSizeFull();
         grid.setSizeFull();
 
@@ -44,20 +45,18 @@ public class MenuMainView extends VerticalLayout {
         setSizeFull();
         refresh();
 
-//        grid.asSingleSelect().addValueChangeListener(event -> form.setProduct(grid.asSingleSelect().getValue()));
-
     }
 
     private void updateName() {
-        grid.setItems(productService.findByProductName(filter.getValue()));
+        grid.setItems(menuService.findByProductName(filter.getValue()));
     }
 
     private void updatePrice() {
-        grid.setItems(productService.findByProductPrice(filter1.getValue()));
+        grid.setItems(menuService.findByProductPrice(filter1.getValue()));
     }
 
     public void refresh() {
-        grid.setItems(productService.getProducts());
+        grid.setItems(menuService.getMenus());
     }
 }
 

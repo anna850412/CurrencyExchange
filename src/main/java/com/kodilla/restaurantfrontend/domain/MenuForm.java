@@ -1,7 +1,8 @@
-package com.kodilla.restaurantfrontend.service;
+package com.kodilla.restaurantfrontend.domain;
 
 import com.kodilla.restaurantfrontend.OrderMainView;
 import com.kodilla.restaurantfrontend.ProductType;
+import com.kodilla.restaurantfrontend.service.MenuMainView;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.textfield.TextField;

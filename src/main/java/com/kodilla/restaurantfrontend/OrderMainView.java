@@ -3,6 +3,7 @@ package com.kodilla.restaurantfrontend;
 import com.kodilla.restaurantfrontend.domain.Product;
 import com.kodilla.restaurantfrontend.domain.ProductForm;
 import com.kodilla.restaurantfrontend.service.ProductService;
+import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -11,7 +12,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.Route;
 
-@Route("Restaurant")
+@Route("Order")
 public class OrderMainView extends VerticalLayout {
     private ProductService productService = ProductService.getInstance();
     private Grid<Product> grid = new Grid<>(Product.class);
@@ -33,7 +34,10 @@ public class OrderMainView extends VerticalLayout {
         filter1.addValueChangeListener(e -> updatePrice());
         grid.setColumns("productName", "price", "available","quantity", "type");
         form.setProduct(null);
+        menu.addClickListener(e -> {
+            UI.getCurrent().navigate("Menu");
 
+        });
         addNewOrder.addClickListener(e -> {
             grid.asSingleSelect().clear(); //"czyścimy" zaznaczenie
             form.setProduct(new Product());      //dodajemy nowy obiekt do formularza
